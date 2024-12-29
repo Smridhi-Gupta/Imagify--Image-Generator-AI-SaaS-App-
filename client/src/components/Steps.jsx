@@ -1,5 +1,5 @@
 import React from "react";
-import { stepsData } from '../assets/assets'
+import { stepsData } from "../assets/assets";
 const Steps = () => {
   return (
     // assets.js se data
@@ -9,15 +9,18 @@ const Steps = () => {
         Transform Words Into Stunning Images
       </p>
       {/*  steps data  */}
-      <div>
+      <div className="space-y-4 w-full max-w-3xl text-sm">
         {stepsData.map((item, index) => (
-            <div key={index}>
-                <img src={item.icon} alt=""></img>
-                <div>
-                    <h2>{item.title}</h2>
-                    <p>{item.description}</p>
-                </div>
+          <div
+            key={index}
+            className="flex items-center gap-4 p-5 px-8 bg-white/20 shadow-md border cursor-pointer hover:scale-[1.02] transition-all duration-300 rounded-lg"
+          >
+            <img width={40} src={item.icon} alt=""></img>
+            <div>
+              <h2 className="text-xl font-medium">{item.title}</h2>
+              <p className="text-gray-500">{item.description}</p>
             </div>
+          </div>
         ))}
       </div>
     </div>
