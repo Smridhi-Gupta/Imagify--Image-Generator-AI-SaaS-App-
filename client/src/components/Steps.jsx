@@ -3,7 +3,7 @@ import { stepsData } from '../assets/assets'
 const Steps = () => {
   return (
     // assets.js se data
-    <div>
+    <div className="flex flex-col items-center justify-center my-32">
       <h1 className="text-3xl sm:text-4xl font-semibold mb-2">How it works</h1>
       <p className="tex-lg text-gray-600 mb-8">
         Transform Words Into Stunning Images
@@ -11,7 +11,13 @@ const Steps = () => {
       {/*  steps data  */}
       <div>
         {stepsData.map((item, index) => (
-            <div></div>
+            <div key={index}>
+                <img src={item.icon} alt=""></img>
+                <div>
+                    <h2>{item.title}</h2>
+                    <p>{item.description}</p>
+                </div>
+            </div>
         ))}
       </div>
     </div>
