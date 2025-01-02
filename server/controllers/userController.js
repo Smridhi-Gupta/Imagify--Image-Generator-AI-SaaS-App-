@@ -1,5 +1,7 @@
 import userModel from "../models/userModel.js";
+// for encryption
 import bcrypt from "bcrypt";
+// for user authentication
 import jwt from "jsonwebtoken";
 
 const registerUser = async (req, res) => {
@@ -20,11 +22,15 @@ const registerUser = async (req, res) => {
 
     //created new user in db
     const newUser = new userModel(userData);
+    // save new user in db
     const user = await newUser.save();
+
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-    res.json({ success: true, token });
+
+    res.json({ success: true, token, user: { name: user.name } });
   } catch (error) {
     console.log(error);
+
     res.json({ success: false, message: error.message });
   }
 };
@@ -51,4 +57,4 @@ const loginUser = async (req, res) => {
   }
 };
 
-export {registerUser, loginUser}
+export { registerUser, loginUser };
