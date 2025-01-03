@@ -1,4 +1,6 @@
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
 const userAuth = async (req, res, next) => {
   const { token } = req.headers;
@@ -11,7 +13,7 @@ const userAuth = async (req, res, next) => {
     const tokenDecode = jwt.verify(token, process.env.JWT_SECRET);
 
     if (tokenDecode.id) {
-      req.body.userID = tokenDecode.id;
+      req.body.userId = tokenDecode.id;
     } else {
       return res.json({
         success: false,

@@ -3,6 +3,9 @@ import userModel from "../models/userModel.js";
 import bcrypt from "bcrypt";
 // for user authentication
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
+
 
 const registerUser = async (req, res) => {
   try {
@@ -31,7 +34,7 @@ const registerUser = async (req, res) => {
   } catch (error) {
     console.log(error);
 
-    res.json({ success: false, message: error.message });
+    res.json({ success: false, message: "nahi chlra"+error.message });
   }
 };
 
