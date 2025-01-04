@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
 import razorpay from "razorpay";
+import transactionModel from "../models/transactionModel.js";
 
 const registerUser = async (req, res) => {
   try {
@@ -90,6 +91,44 @@ const paymentRazorpay = async (req, res) => {
     if (!userId || !planId) {
       return res.json({ success: false, message: "Missing Details" });
     }
+
+    let credits, plan, amount, date;
+
+    switch (planId) {
+      case "Basic":
+        plan = "Basic";
+        credits = 100;
+        amount = 10;
+        break;
+
+      case "Advanced":
+        plan = "ADvanced";
+        credits = 500;
+        amount = 50;
+        break;
+
+      case "Business":
+        plan = "Business";
+        credits = 5000;
+        amount = 250;
+        break;
+
+      default:
+        return res.json({ success: false, message: "Plan Not Found" });
+    }
+
+    date = Date.now();
+
+    const transactionData = {
+      userId, plan, amount, credits, date
+    }
+
+    const newTransaction = await transactionModel.create(transactionData)
+
+    await razorpayInstance.orders.create(options, (error, order) => {
+
+    })
+
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
