@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
-
+import razorpay from "razorpay";
 
 const registerUser = async (req, res) => {
   try {
@@ -34,7 +34,7 @@ const registerUser = async (req, res) => {
   } catch (error) {
     console.log(error);
 
-    res.json({ success: false, message: "nahi chlra"+error.message });
+    res.json({ success: false, message: "nahi chlra" + error.message });
   }
 };
 
@@ -70,6 +70,26 @@ const userCredits = async (req, res) => {
       credits: user.creditBalance,
       user: { name: user.name },
     });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+const razorpayInstance = new razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET,
+});
+
+const paymentRazorpay = async (req, res) => {
+  try {
+    const { userId, planId } = req.body;
+
+    const userData = await userModel.findById(userId);
+
+    if (!userId || !planId) {
+      return res.json({ success: false, message: "Missing Details" });
+    }
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
