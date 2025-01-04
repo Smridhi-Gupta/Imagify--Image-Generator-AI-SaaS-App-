@@ -4,13 +4,13 @@ import { AppContext } from "../context/AppContext";
 import { motion } from "framer-motion";
 
 const BuyCredit = () => {
-  const { user } = useContext(AppContext);
+  const { user, backendUrl, loadCreditsData, token, setShowLogin } = useContext(AppContext);
 
   return (
     <motion.div
       initial={{ opacity: 0.2, y: 100 }}
       transition={{ duration: 1 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      whileInView={{ opacity: 1, y: 0 }}  
       viewport={{ once: true }}
       className="min-h-[80vh] text-center pt-14 mb-10"
     >
