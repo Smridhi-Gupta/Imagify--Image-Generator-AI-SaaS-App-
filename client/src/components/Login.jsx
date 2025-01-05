@@ -16,7 +16,7 @@ const Login = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-
+console.log(backendURL + "----ye hai aafat")
     try {
       if (state === "Login") {
         const { data } = await axios.post(backendURL + "/api/user/login", {
