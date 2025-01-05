@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 const Login = () => {
   const [state, setState] = useState("Login");
-  const { setShowLogin, backendURL, setToken, setUser } =
+  const { setShowLogin, backendUrl, setToken, setUser } =
     useContext(AppContext);
 
   const [name, setName] = useState("");
@@ -16,10 +16,10 @@ const Login = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-console.log(backendURL + "----ye hai aafat")
+console.log(backendUrl + "----ye hai aafat")
     try {
       if (state === "Login") {
-        const { data } = await axios.post(backendURL + "/api/user/login", {
+        const { data } = await axios.post(backendUrl + "/api/user/login", {
           email,
           password,
         });
@@ -32,7 +32,7 @@ console.log(backendURL + "----ye hai aafat")
           toast.error(data.message);
         }
       } else {
-        const { data } = await axios.post(backendURL + "/api/user/register", {
+        const { data } = await axios.post(backendUrl + "/api/user/register", {
           name,
           email,
           password,
